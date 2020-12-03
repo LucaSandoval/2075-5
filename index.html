@@ -34,6 +34,12 @@ body{
   border-style:solid;
 }
 
+#myClock{
+  font-size:52px;
+  color:gray;
+/*   border-style:solid; */
+}
+
 #pauseButton{
   width: 100px;
   height: 35px;
@@ -70,8 +76,9 @@ body{
 </head>
 
 <body translate="no" >
-  <h1> Timer With Button Example </h1>
-<div id= "status"> Timer: Not Paused </div>
+  <h1> Date, Stopwatch, Timer </h1>
+<div id = "myClock"> 0:0:00 </div>
+<div id= "status"> Timer: Paused </div>
 <div> <span id = "timer">0</span> </div>
 <div id = "alternateText"> Add Ammount: <span id = "ammountInd">x1</span> <button id = "1Button"> x1 </button> <button id = "5Button"> x5 </button>  </button> <button id = "30Button"> x30 </button></div>
 <button id = "pauseButton"> PAUSE </button>
@@ -83,19 +90,29 @@ console.clear();
 
 let timer = 15;
 let addAmmount = 1;
-let pause = false;
+let pause = true;
 let myButton = document.getElementById("pauseButton");
 let status = document.getElementById("status");
 let resetButton = document.getElementById("resetButton");
 let oneButton = document.getElementById("1Button");
 let fiveButton = document.getElementById("5Button");
 let thirtyButton = document.getElementById("30Button");
+let dateText = document.getElementById("myClock");
 
 addOne = () =>{
   if (pause == false && timer > 0){
     timer--;
   }
 }
+
+updateDate = () =>{
+  let d = new Date();
+let n = d.toLocaleTimeString();
+  //console.log(n);
+  dateText.innerHTML = n;
+}
+
+updateDate();
 
 togglePause = () =>{
   pause = !pause;
@@ -143,6 +160,7 @@ thirtyButton.addEventListener("click", setAddAmmount.bind(this, 30));
 
 setInterval(addOne, 1000);
 setInterval(updateTimerText, 5);
+setInterval(updateDate, 5);
     </script>
 
   
